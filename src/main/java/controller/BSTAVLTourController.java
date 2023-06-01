@@ -88,8 +88,8 @@ public class BSTAVLTourController {
             // Dibujar las conexiones con los nodos hijos primero
             if (node.left != null) {
                 double childX = x - levelWidth / 2;
-                double childY = y + 40;
-                drawTree(node.left, childX, childY, levelWidth / 1.8);
+                double childY = y + 50;
+                drawTree(node.left, childX, childY, levelWidth / 2);
 
                 // Dibujar una línea desde el nodo actual al nodo hijo izquierdo
                 Line line = new Line(x, y, childX, childY - 20);
@@ -98,8 +98,8 @@ public class BSTAVLTourController {
 
             if (node.right != null) {
                 double childX = x + levelWidth / 2;
-                double childY = y + 40;
-                drawTree(node.right, childX, childY, levelWidth / 1.8);
+                double childY = y + 50;
+                drawTree(node.right, childX, childY, levelWidth / 2);
 
                 // Dibujar una línea desde el nodo actual al nodo hijo derecho
                 Line line = new Line(x, y, childX, childY - 20);
@@ -107,7 +107,7 @@ public class BSTAVLTourController {
             }
 
             // Dibujar el nodo actual como un círculo después de las líneas
-            Circle circle = new Circle(x, y, 20);
+            Circle circle = new Circle(x, y, 15);
             circle.setFill(Color.LIGHTGREEN); // Cambiar el color a verde claro
             treePane.getChildren().add(circle);
 
@@ -260,11 +260,13 @@ public class BSTAVLTourController {
     @FXML
     void BSTOnAction(ActionEvent event) {
         this.AVLRadioButton.setSelected(!this.AVLRadioButton.selectedProperty().getValue());
+        btnRandomize(event);
     }
 
     @FXML
     void AVLOnAction(ActionEvent event) {
         this.BSTRadioButton.setSelected(!this.BSTRadioButton.selectedProperty().getValue());
+        btnRandomize(event);
 
     }
 
