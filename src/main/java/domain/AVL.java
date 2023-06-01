@@ -84,14 +84,14 @@ public class AVL implements Tree {
 
         //Left Right Case
         if(balance>1&&util.Utility.compare(element, node.left.data)>0) {
-            node.path = node.path + ". Rotación a la izq";
+            node.path = node.path + ". Rotación a la izq, der";
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
 
         //Right Left Case
         if(balance<-1&&util.Utility.compare(element, node.right.data)<0) {
-            node.path = node.path + ". Rotación a la der";
+            node.path = node.path + ". Rotación a la der, izq";
             node.right = rightRotate(node.right);
             return leftRotate(node);
         }
