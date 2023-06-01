@@ -28,12 +28,12 @@
                </font></Label>
             <ScrollPane layoutX="5.0" layoutY="194.0" prefHeight="451.0" prefWidth="837.0">
                <content>
-                  <Pane fx:id="treePane" prefHeight="509.0" prefWidth="900.0" />
+                  <Pane fx:id="treePane" prefHeight="510.0" prefWidth="900.0" />
                </content>
             </ScrollPane>
             <Pane layoutX="-1.0" prefHeight="69.0" prefWidth="850.0" style="-fx-background-color: lightblue;">
                <children>
-                  <Text layoutX="85.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphic Binary Tree - Transversal Tour">
+                  <Text layoutX="85.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphic Binary Search Tree">
                      <font>
                         <Font name="Arial" size="39.0" />
                      </font>

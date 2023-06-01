@@ -122,11 +122,11 @@ public class BSTAVLTourController {
         counter = 1;
         if (BSTRadioButton.isSelected()) {
             if (bst.getRoot() != null) {
-                drawTree(bst.getRoot(), 400, 50, 350);
+                displayInOrder(bst.getRoot(), treePane.getPrefWidth() / 2, dVertical, treePane.getPrefWidth() / 4);
             }
         } else if (AVLRadioButton.isSelected()) {
             if (avl.getRoot() != null) {
-                drawTree(avl.getRoot(), 400, 50, 350);
+                displayInOrder(avl.getRoot(), treePane.getPrefWidth() / 2, dVertical, treePane.getPrefWidth() / 4);
             }
         }
 
