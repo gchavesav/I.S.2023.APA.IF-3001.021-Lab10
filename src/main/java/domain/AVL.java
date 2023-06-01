@@ -63,9 +63,9 @@ public class AVL implements Tree {
         if(node==null) //el arbol esta vacio
             node = new BTreeNode(element, sequence);
         else if(util.Utility.compare(element, node.data)< 0)
-            node.left = add(node.left, element, sequence + "/left");
+            node.left = add(node.left, element, sequence + "/izq");
         else if(util.Utility.compare(element, node.data)> 0)//va como hijo der
-            node.right = add(node.right, element,  sequence+ "/right");
+            node.right = add(node.right, element,  sequence+ "/der");
 
         //se debe verificar que el arbol este balanceado
         int balance = getBalanceFactor(node);
