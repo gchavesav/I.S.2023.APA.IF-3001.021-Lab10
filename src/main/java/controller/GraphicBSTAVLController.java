@@ -25,9 +25,6 @@ public class GraphicBSTAVLController
     private Text inOrderTextField;
     @javafx.fxml.FXML
     private Text postOrderTextField;
-
-    ///private Tree tree = null;
-    //private BTree tree;
     private BST treeBST;
     private AVL treeAVL;
 
@@ -113,12 +110,23 @@ public class GraphicBSTAVLController
         treeHeightTextField.setText("Tree Height: " + tree.height());
     }
 
+    private void setFieldsNull() throws TreeException {
+        inOrderTextField.setText("Inorder Transversal: ");
+        postOrderTextField.setText("Postorder Transversal: ");
+        preOrderTextField.setText("Preorder Transversal: ");
+        treeHeightTextField.setText("Tree Height: ");
+    }
+
     public void randomizeOnAction(ActionEvent actionEvent) throws TreeException {
 
-        countHeight = 0;//reiniciar contador de height
-        alert.setAlertType(Alert.AlertType.INFORMATION);
-        //Segun el tipo de Radio Button, crear la instancia indicada
+        //Limpiar todo
+        lienzo.getChildren().clear();
+        treeBST.clear();
+        treeAVL.clear();
+        setFieldsNull();
         textBalanced.setText("");
+
+        alert.setAlertType(Alert.AlertType.INFORMATION);
 
         if (typeTree == 0){
             alert.setContentText("Please select one button");
@@ -127,7 +135,7 @@ public class GraphicBSTAVLController
         }else if (typeTree == 1){
 
             for (int i = 0; i < 20; i++) {
-                treeBST.add(util.Utility.random(25));
+                treeBST.add(util.Utility.random());
             }
             lienzo.getChildren().clear();
             //drawBinaryTree(treeBST.getRoot(), lienzo.getPrefWidth(), 50, lienzo.getPrefWidth()/1.7);
@@ -135,10 +143,9 @@ public class GraphicBSTAVLController
             setFields(treeBST);
         }else{
             for (int i = 0; i < 20; i++) {
-                treeAVL.add(util.Utility.random(25));
+                treeAVL.add(util.Utility.random());
             }
             lienzo.getChildren().clear();
-//            drawBinaryTree(treeAVL.getRoot(), lienzo.getPrefWidth(), 50, lienzo.getPrefWidth()/1.7);
             drawBinaryTree(treeAVL.getRoot(), 400, 50, 350);
             setFields(treeAVL);
         }
@@ -211,25 +218,25 @@ public class GraphicBSTAVLController
                 lienzo.getChildren().add(line);
 
                 double startX = x - level;
-                double endX = x + level*2;
+                double endX = x + level * 2;
                 double lineY = y + 20;
                 String textHeight = "";
                 Text text = new Text();
 
-                if (typeTree == 1){
+                if (typeTree == 1) {
                     text.setText(String.valueOf(treeBST.height(node.data)));
-                }else {
+                } else {
                     text.setText(String.valueOf(treeAVL.height(node.data)));
                 }
-
-                text.setX(startX);
-                text.setY(lineY);
                 //Line levelLine = new Line(startX, lineY, endX, lineY);
                 Line levelLine = new Line();
+
                 levelLine.startXProperty().bind(lienzo.layoutXProperty());
                 levelLine.endXProperty().bind(lienzo.widthProperty());
                 levelLine.setEndY(lineY);
                 levelLine.setStartY(lineY);
+                text.setX(levelLine.getStartX());
+                text.setY(levelLine.getStartY());
                 lienzo.getChildren().add(text); //numero que indica el tamano actual de este nodo
                 lienzo.getChildren().add(levelLine);
             }
@@ -247,31 +254,10 @@ public class GraphicBSTAVLController
                 lienzo.getChildren().add(line);
             }
 
-            // Dibujar una línea debajo del nodo actual si no es el último nivel
-//            if (currentLevel < maxLevel && (node.left != null && node.right == null)) {
-//                double startX = x - level;
-//                double endX = x + level*2;
-//                double lineY = y + 20;
-//                String textHeight = "";
-//                Text text = new Text();
-//
-//                if (typeTree == 1){
-//                    text.setText(String.valueOf(treeBST.height(node.data)));;
-//                }else {
-//                    text.setText(String.valueOf(treeAVL.height(node.data)));
-//                }
-//
-//                text.setX(startX);
-//                text.setY(lineY);
-//                //Line levelLine = new Line(startX, lineY, endX, lineY);
-//                Line levelLine = new Line();
-//                levelLine.startXProperty().bind(lienzo.layoutXProperty());
-//                levelLine.endXProperty().bind(lienzo.widthProperty());
-//                levelLine.setEndY(lineY);
-//                levelLine.setStartY(lineY);
-//                lienzo.getChildren().add(text); //numero que indica el tamano actual de este nodo
-//                lienzo.getChildren().add(levelLine);
-//            }
+            //if (currentLevel < maxLevel && (node.left != null && node.right == null)) {
+
+            //}
+
 
             // Dibujar el nodo actual como un círculo después de las líneas
             Circle circle = new Circle(x, y, 20);
@@ -287,15 +273,17 @@ public class GraphicBSTAVLController
     }
 
     @FXML
-    public void btnRadioBST(ActionEvent actionEvent) {
+    public void btnRadioBST(ActionEvent actionEvent) throws TreeException {
         lienzo.getChildren().clear();
+        setFieldsNull();
         //this.radioAVL.setSelected(!this.radioAVL.selectedProperty().getValue());
         typeTree = 1;
     }
 
     @FXML
-    public void btnRadioAVL(ActionEvent actionEvent) {
+    public void btnRadioAVL(ActionEvent actionEvent) throws TreeException {
         lienzo.getChildren().clear();
+        setFieldsNull();
         //this.radioBST.setSelected(!this.radioBST.selectedProperty().getValue());
         typeTree = 2;
     }
