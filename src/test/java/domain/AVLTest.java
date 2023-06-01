@@ -51,7 +51,12 @@ class AVLTest {
             );
             //Punto 5.i
             System.out.println("Binary Search Tree is balanced? "+avl.isBalanced());
-
+            //Punto 5.j
+            // ver en remove en AVL
+            // Punto 5.k
+            System.out.println(avl.toString());
+            //Punto 5.l
+            System.out.println("Binary Search Tree is balanced? "+avl.isBalanced());
 
 
         }catch (TreeException ex){
