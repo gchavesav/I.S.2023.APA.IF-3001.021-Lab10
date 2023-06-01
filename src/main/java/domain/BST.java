@@ -223,17 +223,15 @@ public class BST implements Tree {
         return result;
     }
 
-    public boolean isBalanced(Tree bst) throws TreeException {
-        if (bst.isEmpty()) {
-            throw new TreeException("Binary Search Tree is empty");
+    public boolean isBalanced() throws TreeException {
+        if (isEmpty()) {
+            throw new TreeException("AVL Binary Search Tree is empty");
         }
+
         return isBalanced(root);
     }
 
-    private boolean isBalanced(BTreeNode node) throws TreeException {
-        if(isEmpty()) {
-            throw new TreeException("Binary Search Tree is empty");
-        }
+    private boolean isBalanced(BTreeNode node) {
         if (node == null) {
             return true;
         }

@@ -18,15 +18,25 @@ class BSTTest {
             System.out.println("Min: "+bst.min()+". Max: "+bst.max());
 
             // Prueba de isBalanced()
-           if(bst.isBalanced(bst)){
+           if(isBalanced(bst)){
                System.out.println("The tree is balanced");
            }else {
                System.out.println("The tree is not balanced");
            }
 
 
+
+
+
         }catch (TreeException ex){
             throw new RuntimeException(ex);
         }
+    }
+
+    public boolean isBalanced(Tree bst) throws TreeException {
+        if (bst.isEmpty()) {
+            throw new TreeException("Binary Search Tree is empty");
+        }
+        return bst.isBalanced();
     }
 }
