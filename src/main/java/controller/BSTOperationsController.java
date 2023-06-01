@@ -31,18 +31,51 @@ public class BSTOperationsController {
 
     @FXML
     void onActionRandomize(ActionEvent event) {
-
+        drawPane.getChildren().clear();
+        randomize(20);
+        drawTree(bst.getRoot(), 400, 50, 350);
     }
 
     @FXML
     void onActionAdd(ActionEvent event) {
-
+        try {
+            int newNode = util.Utility.random(100);
+            while (bst.contains(newNode)) {
+                newNode = util.Utility.random(100);
+            }
+            bst.add(newNode);
+            //actualizar arbol
+            drawPane.getChildren().clear();
+            drawTree(bst.getRoot(), 400, 50, 350);
+            //informacion
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setContentText("The node: " + newNode + " has been added successfully!");
+        }catch(TreeException ex){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("There was an error in the search process");
+        }
+        alert.showAndWait();
     }
 
     @FXML
     void onActionNodeHeight(ActionEvent event) {
+        dialog = util.FXUtility.dialog("Node Height","Height: ");
+        dialog.showAndWait();
+        int value = Integer.parseInt(dialog.getResult());
+        this.alert=util.FXUtility.alert("Node Height","Height: ");
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        try {
+            if (bst.contains(value)){
+                alert.setContentText(String.valueOf(bst.height(value)));
+            }else {
+                alert.setContentText("The BTree does not contains " + value);
+            }
 
-
+        } catch (TreeException e) {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("There was an error in the search process");
+        }
+        alert.showAndWait();
     }
 
     @FXML
