@@ -233,4 +233,13 @@ public class BST implements Tree {
         return result;
     }
 
+    public void modify(Object a, Object b) throws TreeException {
+        if(isEmpty())
+            throw new TreeException("Binary Search Tree is empty");
+        else if (!contains(a))
+            throw new TreeException("The object a isn't in the Binary Search Tree");
+        remove(a);
+        add(b);
+    }
+
 }
