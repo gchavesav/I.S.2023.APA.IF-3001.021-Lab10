@@ -130,30 +130,57 @@ public class AVL implements Tree {
     }
 
     private BTreeNode remove(BTreeNode node, Object element){
-        if(node!=null){
-            if(util.Utility.compare(element, node.data)< 0)
+        if(node!=null) {
+            if (util.Utility.compare(element, node.data) < 0)
                 node.left = remove(node.left, element);
-            else if(util.Utility.compare(element, node.data)> 0)
+            else if (util.Utility.compare(element, node.data) > 0)
                 node.right = remove(node.right, element);
-            else if(util.Utility.compare(node.data, element)==0){ //ya encontramos el elemento a eliminar
+            else if (util.Utility.compare(node.data, element) == 0) { //ya encontramos el elemento a eliminar
                 //Caso 1. Es un nodo sin hijos. Es una hoja
-                if(node.left==null && node.right==null)
+                if (node.left == null && node.right == null)
                     return null;
-                //Caso 2. El nodo solo tiene un hijo
-                else if(node.left!=null && node.right==null)
+                    //Caso 2. El nodo solo tiene un hijo
+                else if (node.left != null && node.right == null)
                     return node.left; //retorna el subarbol izq y sustituye el nodo actual
-                else if(node.left==null && node.right!=null)
+                else if (node.left == null && node.right != null)
                     return node.right; //retorna el subarbol derecho y sustituye el nodo actual
-                //Caso 3. El nodo tiene 2 hijos
-                else if(node.left!=null && node.right!=null){
+                    //Caso 3. El nodo tiene 2 hijos
+                else if (node.left != null && node.right != null) {
                     Object value = min(node.right);
                     node.data = value;
                     node.right = remove(node.right, value);
                 }
             }
-        }
+
+            //se debe verificar que el arbol este balanceado
+            int balance = getBalanceFactor(node);
+
+            //Left Left Case
+            if(balance>1&&getBalanceFactor(node.left)>=0){
+                return rightRotate(node);}
+
+            //Right Right Case
+            if (balance < -1 && getBalanceFactor(node.right) <= 0){
+                return leftRotate(node);}
+
+            //Left Right Case
+            if (balance > 1 && getBalanceFactor(node.left) < 0) {
+                node.left = leftRotate(node.left);
+                return rightRotate(node);
+            }
+
+            //Right Left Case
+            if (balance < -1 && getBalanceFactor(node.right) > 0) {
+                node.right = rightRotate(node.right);
+                return leftRotate(node);
+            }
+        }//end node!=null
+
+
+
         return node; //retorna el nodo modificado
     }
+
 
     @Override
     public int height(Object element) throws TreeException {
