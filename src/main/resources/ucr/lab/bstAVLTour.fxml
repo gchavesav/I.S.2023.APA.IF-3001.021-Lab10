@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="497.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BSTAVLTourController">
+   <center>
+      <AnchorPane prefHeight="639.0" prefWidth="875.0">
+         <children>
+            <Button fx:id="btnRandomize" layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnRandomize" prefHeight="22.0" prefWidth="170.0" style="-fx-background-color: lightblue;" stylesheets="@stylesheet.css" text="Randomize">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnPreOrder" layoutX="230.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnPreOrder" style="-fx-background-color: lightblue;" stylesheets="@stylesheet.css" text="Pre-Order" />
+            <Button fx:id="btnPostOrder" layoutX="632.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnPostOrder" style="-fx-background-color: lightblue;" stylesheets="@stylesheet.css" text="Post-Order" />
+            <Button fx:id="btnInOrder" layoutX="436.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnInOrder" style="-fx-background-color: lightblue;" stylesheets="@stylesheet.css" text="In-Order" />
+            <Label fx:id="tourNameLabel" layoutX="14.0" layoutY="126.0" prefHeight="39.0" prefWidth="656.0" textFill="#39badb">
+               <font>
+                  <Font name="Arial" size="28.0" />
+               </font></Label>
+            <ScrollPane layoutX="5.0" layoutY="194.0" prefHeight="451.0" prefWidth="837.0">
+               <content>
+                  <Pane fx:id="treePane" prefHeight="510.0" prefWidth="900.0" />
+               </content>
+            </ScrollPane>
+            <Pane layoutX="-1.0" prefHeight="69.0" prefWidth="850.0" style="-fx-background-color: lightblue;">
+               <children>
+                  <Text layoutX="85.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphic Binary Search Tree">
+                     <font>
+                        <Font name="Arial" size="39.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <RadioButton fx:id="BSTRadioButton" layoutX="31.0" layoutY="157.0" mnemonicParsing="false" onAction="#BSTOnAction" selected="true" text="Árbol BST" />
+            <RadioButton fx:id="AVLRadioButton" layoutX="110.0" layoutY="157.0" mnemonicParsing="false" onAction="#AVLOnAction" text="Árbol AVL" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
