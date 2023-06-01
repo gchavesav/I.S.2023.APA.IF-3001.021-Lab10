@@ -223,6 +223,33 @@ public class BST implements Tree {
         return result;
     }
 
+    public boolean isBalanced(Tree bst) throws TreeException {
+        if (bst.isEmpty()) {
+            throw new TreeException("Binary Search Tree is empty");
+        }
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(BTreeNode node) throws TreeException {
+        if(isEmpty()) {
+            throw new TreeException("Binary Search Tree is empty");
+        }
+        if (node == null) {
+            return true;
+        }
+
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+
+        if (Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(node.left) && isBalanced(node.right)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
     @Override
     public String toString() {
         if(isEmpty()) return "Binary Search tree is empty";

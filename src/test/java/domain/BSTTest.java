@@ -16,6 +16,15 @@ class BSTTest {
             System.out.println(bst);
             System.out.println("Size: " + bst.size() + ". Height: " + bst.height());
             System.out.println("Min: "+bst.min()+". Max: "+bst.max());
+
+            // Prueba de isBalanced()
+           if(bst.isBalanced(bst)){
+               System.out.println("The tree is balanced");
+           }else {
+               System.out.println("The tree is not balanced");
+           }
+
+
         }catch (TreeException ex){
             throw new RuntimeException(ex);
         }
