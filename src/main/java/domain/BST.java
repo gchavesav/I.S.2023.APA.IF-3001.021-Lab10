@@ -242,4 +242,29 @@ public class BST implements Tree {
         add(b);
     }
 
+    //Josue Barbosa
+    public boolean isBalanced() throws TreeException {
+        if (isEmpty()) {
+            throw new TreeException("AVL Binary Search Tree is empty");
+        }
+
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(BTreeNode node) {
+        if (node == null) {
+            return true;
+        }
+
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+
+        if (Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(node.left) && isBalanced(node.right)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 }

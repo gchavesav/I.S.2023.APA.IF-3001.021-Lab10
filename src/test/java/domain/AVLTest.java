@@ -36,15 +36,21 @@ class AVLTest {
             System.out.println("\nIs it Balanced? "+avl.isBalanced());
             System.out.println("");
             //Punto 5.g
-            avl.remove(11);
-            avl.remove(13);
-            avl.remove(15);
+            System.out.println("Removing 11"); avl.remove(11);
+            System.out.println("Removing 13"); avl.remove(13);
+            System.out.println("Removing 15"); avl.remove(15);
 
 
             //Punto 5.h
             System.out.println(avl.toString());
-            //Punto 5.i
+            //Punto 5.d, 5.e
             System.out.println("Is it Balanced? "+avl.isBalanced());
+            System.out.println(isBalanced(avl)
+                    ?"\n(Testing Class method) AVL tree is balanced!!!"
+                    :"\n(Testing Class method) AVL tree is not balanced"
+            );
+            //Punto 5.i
+            System.out.println("Binary Search Tree is balanced? "+avl.isBalanced());
 
 
 
@@ -52,6 +58,16 @@ class AVLTest {
             throw new RuntimeException(ex);
         }
     }
+
+    public boolean isBalanced(Tree bst) throws TreeException {
+        if (bst.isEmpty()) {
+            throw new TreeException("AVL Binary Search Tree is empty");
+        }
+        if(bst instanceof BST) return ((BST)bst).isBalanced();
+        if(bst instanceof AVL) return ((AVL)bst).isBalanced();
+        return false;
+    }
+
 
 
 

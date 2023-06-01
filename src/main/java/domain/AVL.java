@@ -56,16 +56,16 @@ public class AVL implements Tree {
 
     @Override
     public void add(Object element) {
-        root = add(root, element);
+        root = add(root, element, "root");
     }
 
-    private BTreeNode add(BTreeNode node, Object element){
+    private BTreeNode add(BTreeNode node, Object element, String sequence){
         if(node==null) //el arbol esta vacio
-            node = new BTreeNode(element);
+            node = new BTreeNode(element, "Added as "+sequence);
         else if(util.Utility.compare(element, node.data)< 0)
-            node.left = add(node.left, element);
+            node.left = add(node.left, element, "/left");
         else if(util.Utility.compare(element, node.data)> 0)//va como hijo der
-            node.right = add(node.right, element);
+            node.right = add(node.right, element, "/right");
 
         //se debe verificar que el arbol este balanceado
         int balance = getBalanceFactor(node);
