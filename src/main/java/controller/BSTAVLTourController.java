@@ -32,6 +32,7 @@ public class BSTAVLTourController {
     private Label tourNameLabel;
     private double dVertical = 50;
     private int counter = 1;
+    private int SIZE = 20;
     @FXML
     private Pane treePane;
     @FXML
@@ -44,58 +45,88 @@ public class BSTAVLTourController {
 
     @FXML
     public void initialize() {
-        fill();
-    }
 
-    public void fill() {
-        int size = util.Utility.random(6, 35);
-        for (int i = 0; i < size; i++) {
-            if (BSTRadioButton.isSelected()) {
-                bst.add("" + util.Utility.random(0, 50));
-            } else if (AVLRadioButton.isSelected()) {
-                avl.add("" + util.Utility.random(0, 50));
-            }
-
-            displayTree();
-        }
-    }
-
-    public void displayTree() {
+        fill(SIZE);
         if (BSTRadioButton.isSelected()) {
             if (bst.getRoot() != null) {
-                displayTree(bst.getRoot(), treePane.getPrefWidth() / 2, dVertical, treePane.getPrefWidth() / 4);
+                drawTree(bst.getRoot(), 400, 50, 350);
             }
         } else if (AVLRadioButton.isSelected()) {
             if (avl.getRoot() != null) {
-                displayTree(avl.getRoot(), treePane.getPrefWidth() / 2, dVertical, treePane.getPrefWidth() / 4);
+                drawTree(avl.getRoot(), 400, 50, 350);
             }
         }
     }
 
-    private void displayTree(BTreeNode root, double x, double y, double dHorizontal) {
-        if (root.left != null) {
-            treePane.getChildren().add(new Line(x - dHorizontal, y + dVertical, x, y));
-            displayTree(root.left, x - dHorizontal, y + dVertical, dHorizontal / 2);
+    public void fill(int size) {
+
+        for (int i = 0; i < size; i++) {
+            if (BSTRadioButton.isSelected()) {
+                bst.add(util.Utility.random(50));
+            } else if (AVLRadioButton.isSelected()) {
+                avl.add( util.Utility.random(50));
+            }
         }
-        if (root.right != null) {
-            treePane.getChildren().add(new Line(x + dHorizontal, y + dVertical, x, y));
-            displayTree(root.right, x + dHorizontal, y + dVertical, dHorizontal / 2);
-        }
-        Circle c = new Circle(x, y, 15);
-        c.setStroke(Color.BLACK);
-        c.setFill(Color.LIGHTCORAL);
-        treePane.getChildren().addAll(c, new Text(x - 4, y + 4, (String) root.data));
     }
 
+/*
+    public void displayTree() {
+        if (BSTRadioButton.isSelected()) {
+            if (bst.getRoot() != null) {
+                drawTree(bst.getRoot(), 400, 50, 350);
+            }
+        } else if (AVLRadioButton.isSelected()) {
+            if (avl.getRoot() != null) {
+                drawTree(avl.getRoot(), 400, 50, 350);
+            }
+        }
+    }
+*/
+
+    private void drawTree(BTreeNode node, double x, double y, double levelWidth) {
+        if (node != null) {
+            // Dibujar las conexiones con los nodos hijos primero
+            if (node.left != null) {
+                double childX = x - levelWidth / 2;
+                double childY = y + 40;
+                drawTree(node.left, childX, childY, levelWidth / 1.8);
+
+                // Dibujar una línea desde el nodo actual al nodo hijo izquierdo
+                Line line = new Line(x, y, childX, childY - 20);
+                treePane.getChildren().add(line);
+            }
+
+            if (node.right != null) {
+                double childX = x + levelWidth / 2;
+                double childY = y + 40;
+                drawTree(node.right, childX, childY, levelWidth / 1.8);
+
+                // Dibujar una línea desde el nodo actual al nodo hijo derecho
+                Line line = new Line(x, y, childX, childY - 20);
+                treePane.getChildren().add(line);
+            }
+
+            // Dibujar el nodo actual como un círculo después de las líneas
+            Circle circle = new Circle(x, y, 20);
+            circle.setFill(Color.LIGHTGREEN); // Cambiar el color a verde claro
+            treePane.getChildren().add(circle);
+
+            // Mostrar el valor del nodo
+            Text text = new Text(String.valueOf(node.data));
+            text.setX(x - 5);
+            text.setY(y + 5);
+            treePane.getChildren().add(text);
+        }
+    }
     public void displayInOrder() {
         counter = 1;
         if (BSTRadioButton.isSelected()) {
             if (bst.getRoot() != null) {
-                displayInOrder(bst.getRoot(), treePane.getPrefWidth() / 2, dVertical, treePane.getPrefWidth() / 4);
+                drawTree(bst.getRoot(), 400, 50, 350);
             }
         } else if (AVLRadioButton.isSelected()) {
             if (avl.getRoot() != null) {
-                displayInOrder(avl.getRoot(), treePane.getPrefWidth() / 2, dVertical, treePane.getPrefWidth() / 4);
+                drawTree(avl.getRoot(), 400, 50, 350);
             }
         }
 
@@ -161,7 +192,15 @@ public class BSTAVLTourController {
     @FXML
     void btnInOrder(ActionEvent event) {
         treePane.getChildren().clear();
-        displayTree();
+        if (BSTRadioButton.isSelected()) {
+            if (bst.getRoot() != null) {
+                drawTree(bst.getRoot(), 400, 50, 350);
+            }
+        } else if (AVLRadioButton.isSelected()) {
+            if (avl.getRoot() != null) {
+                drawTree(avl.getRoot(), 400, 50, 350);
+            }
+        }
         tourNameLabel.setText("In Order Transversal Tour (L-N-R)");
         displayInOrder();
     }
@@ -169,7 +208,15 @@ public class BSTAVLTourController {
     @FXML
     void btnPostOrder(ActionEvent event) {
         treePane.getChildren().clear();
-        displayTree();
+        if (BSTRadioButton.isSelected()) {
+            if (bst.getRoot() != null) {
+                drawTree(bst.getRoot(), 400, 50, 350);
+            }
+        } else if (AVLRadioButton.isSelected()) {
+            if (avl.getRoot() != null) {
+                drawTree(avl.getRoot(), 400, 50, 350);
+            }
+        }
         tourNameLabel.setText("Post Order Transversal Tour (L-R-N)");
         displayBSTPostOrder();
     }
@@ -177,7 +224,15 @@ public class BSTAVLTourController {
     @FXML
     void btnPreOrder(ActionEvent event) {
         treePane.getChildren().clear();
-        displayTree();
+        if (BSTRadioButton.isSelected()) {
+            if (bst.getRoot() != null) {
+                drawTree(bst.getRoot(), 400, 50, 350);
+            }
+        } else if (AVLRadioButton.isSelected()) {
+            if (avl.getRoot() != null) {
+                drawTree(avl.getRoot(), 400, 50, 350);
+            }
+        }
         tourNameLabel.setText("Pre Order Transversal Tour (N-L-R)");
         displayBSTPreOrder();
 
@@ -189,7 +244,7 @@ public class BSTAVLTourController {
         treePane.getChildren().clear(); // Clear the pane
         avl.clear();
         bst.clear();
-        fill();
+        fill(SIZE);
         int random = util.Utility.random(1, 3);
         if (random == 1) {
             btnPreOrder(event);
