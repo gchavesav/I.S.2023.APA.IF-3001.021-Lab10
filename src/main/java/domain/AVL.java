@@ -274,6 +274,20 @@ public class AVL implements Tree {
         return result;
     }
 
+    public boolean isBalanced() throws TreeException{
+        if(isEmpty()){
+            throw new TreeException("AVL Binary Search Tree is empty");
+        }
+        return isBalanced(root);
+    }
+    private boolean isBalanced (BTreeNode node){
+        if(node==null) return true;
+        else return getBalanceFactor(node)<2
+                &&getBalanceFactor(node)>-2
+                &&isBalanced(node.left)
+                &&isBalanced(node.right);
+    }
+
     @Override
     public String toString() {
         if(isEmpty()) return "AVL Binary Search tree is empty";
@@ -283,5 +297,6 @@ public class AVL implements Tree {
         result+="PostOrder: "+postOrder(root)+"\n";
         return result;
     }
+
 
 }
