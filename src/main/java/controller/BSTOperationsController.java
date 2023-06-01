@@ -53,7 +53,13 @@ public class BSTOperationsController {
         this.alert = util.FXUtility.alert("Node Contains", "Contains: ");
         alert.setAlertType(Alert.AlertType.INFORMATION);
         try {
-            alert.setContentText(String.valueOf(bst.contains(value)));
+            String result= "";
+            if (bst.contains(value)){
+                result="The value exists";
+            }else{
+                result="The value not exists";
+            }
+            alert.setContentText(String.valueOf(result));
             alert.showAndWait();
         } catch (TreeException e) {
             throw new RuntimeException(e);
@@ -63,6 +69,12 @@ public class BSTOperationsController {
 
     @FXML
     void onActionRemove(ActionEvent event) {
+        if (bst.isEmpty()){
+            this.alert = util.FXUtility.alert("Node to remove", "Remove: ");
+            alert.setContentText("Binary Search Tree is empty ");
+            alert.showAndWait();
+        }
+
         try {
             boolean insertado = false;
             do {
