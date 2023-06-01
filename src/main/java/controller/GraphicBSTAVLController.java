@@ -4,6 +4,7 @@ import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -15,16 +16,16 @@ import javafx.scene.text.Text;
 
 public class GraphicBSTAVLController
 {
-    @javafx.fxml.FXML
+    @FXML
     private BorderPane bp;
-    @javafx.fxml.FXML
-    private Text treeHeightTextField;
-    @javafx.fxml.FXML
-    private Text preOrderTextField;
-    @javafx.fxml.FXML
-    private Text inOrderTextField;
-    @javafx.fxml.FXML
-    private Text postOrderTextField;
+    @FXML
+    private Label treeHeightTextField;
+    @FXML
+    private Label preOrderTextField;
+    @FXML
+    private Label inOrderTextField;
+    @FXML
+    private Label postOrderTextField;
 
     ///private Tree tree = null;
     //private BTree tree;
@@ -36,11 +37,11 @@ public class GraphicBSTAVLController
 
     @FXML
     private RadioButton radioBST;
-    @javafx.fxml.FXML
+    @FXML
     private Pane lienzo;
 
     @FXML
-    private Text textBalanced;
+    private Label textBalanced;
 
     private Alert alert;
 
@@ -51,7 +52,7 @@ public class GraphicBSTAVLController
     //1 arbol binario
     //2 arbol AVL
 
-    @javafx.fxml.FXML
+    @FXML
     public void initialize() throws TreeException {
 
         ToggleGroup toggleGroup = new ToggleGroup();
@@ -114,6 +115,8 @@ public class GraphicBSTAVLController
     }
 
     public void randomizeOnAction(ActionEvent actionEvent) throws TreeException {
+        treeBST = new BST();
+        treeAVL = new AVL();
 
         countHeight = 0;//reiniciar contador de height
         alert.setAlertType(Alert.AlertType.INFORMATION);
