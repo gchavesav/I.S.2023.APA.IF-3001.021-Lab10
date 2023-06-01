@@ -232,5 +232,29 @@ public class BST implements Tree {
         result+="PostOrder: "+postOrder(root)+"\n";
         return result;
     }
+    public void printElementHeights() throws TreeException {
+        if (isEmpty()) {
+            throw new TreeException("Binary Search Tree is empty");
+        }
 
+        System.out.println("Height of each element:");
+        printElementHeights(root, 0);
+    }
+
+    private void printElementHeights(BTreeNode node, int height) {
+        if (node != null) {
+            System.out.println("Element: " + node.data + ", Height: " + height);
+            printElementHeights(node.left, height + 1);
+            printElementHeights(node.right, height + 1);
+        }
+    }
+    public void preOrderPrintElementHeights(BTreeNode node, int height) {
+        if (node != null) {
+            System.out.println("Element: " + node.data + ", Height: " + height);
+            preOrderPrintElementHeights(node.left, height + 1);
+            preOrderPrintElementHeights(node.right, height + 1);
+        }
+    }
 }
+
+
