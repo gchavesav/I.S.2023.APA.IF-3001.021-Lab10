@@ -45,6 +45,9 @@ class BSTTest {
         );
 
         //4.j altura de cada nodo
+        // Imprimir la altura de cada elemento usando printElementHeights
+        System.out.println("\nHeight of each element using printElementHeights:");
+        System.out.println(bst.printElementHeights());
 
         //4.k modify
         System.out.println("Modifying 10, new value 201");
