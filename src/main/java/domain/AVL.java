@@ -56,36 +56,42 @@ public class AVL implements Tree {
 
     @Override
     public void add(Object element) {
-        root = add(root, element);
+        root = add(root, element, "raiz");
     }
 
-    private BTreeNode add(BTreeNode node, Object element){
+    private BTreeNode add(BTreeNode node, Object element, String sequence){
         if(node==null) //el arbol esta vacio
-            node = new BTreeNode(element);
+            node = new BTreeNode(element, sequence);
         else if(util.Utility.compare(element, node.data)< 0)
-            node.left = add(node.left, element);
+            node.left = add(node.left, element, sequence + "/left");
         else if(util.Utility.compare(element, node.data)> 0)//va como hijo der
-            node.right = add(node.right, element);
+            node.right = add(node.right, element,  sequence+ "/right");
 
         //se debe verificar que el arbol este balanceado
         int balance = getBalanceFactor(node);
 
         //Left Left Case
-        if(balance>1&&util.Utility.compare(element, node.left.data)<0)
+        if(balance>1&&util.Utility.compare(element, node.left.data)<0) {
+            node.path = node.path + ". Rotación simple a la izq";
             return rightRotate(node);
+        }
 
         //Right Right Case
-        if(balance<-1&&util.Utility.compare(element, node.right.data)>0)
+        if(balance<-1&&util.Utility.compare(element, node.right.data)>0) {
+            node.path = node.path + ". Rotación simple a la der";
             return leftRotate(node);
+        }
 
         //Left Right Case
         if(balance>1&&util.Utility.compare(element, node.left.data)>0) {
+            node.path = node.path + ". Rotación a la izq";
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
 
         //Right Left Case
         if(balance<-1&&util.Utility.compare(element, node.right.data)<0) {
+            node.path = node.path + ". Rotación a la der";
             node.right = rightRotate(node.right);
             return leftRotate(node);
         }
@@ -272,6 +278,31 @@ public class AVL implements Tree {
             result+=node.data+", ";
         }
         return result;
+    }
+
+
+    public String getSequence(){
+        return getSequence(root);
+    }
+
+    private String getSequence(BTreeNode node) {
+        String sequence = "";
+
+        if (node != null && util.Utility.compare(node.data, root.data) == 0){
+            sequence = "Se insertó " + node.data + " como " + node.path;
+        }
+
+        if (node.left != null) {
+            sequence += "\nSe insertó " + node.left.data + " como " + node.left.path;
+            sequence += getSequence(node.left);
+        }
+
+        if (node.right != null) {
+            sequence += "\nSe insertó " + node.right.data + " como " + node.right.path;
+            sequence += getSequence(node.right);
+        }
+
+        return sequence;
     }
 
     @Override
