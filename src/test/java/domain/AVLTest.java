@@ -35,6 +35,10 @@ class AVLTest {
             System.out.println("Min: "+avl.min()+"\nMax: "+avl.max());
             System.out.println("\nIs it Balanced? "+avl.isBalanced());
             System.out.println("");
+
+            //Punto 5.f
+            System.out.println("\nROTATION SEQUENCE\n"+avl.getSequence());
+
             //Punto 5.g
             System.out.println("Removing 11"); avl.remove(11);
             System.out.println("Removing 13"); avl.remove(13);
