@@ -20,7 +20,7 @@ class AVLTest {
 
 
             // Prueba de isBalanced()
-            if(avl.isBalanced()){
+            if(isBalanced(avl)){
                 System.out.println("The tree is balanced");
             }else {
                 System.out.println("The tree is not balanced");
@@ -34,5 +34,11 @@ class AVLTest {
         }catch (TreeException ex){
             throw new RuntimeException(ex);
         }
+    }
+    public boolean isBalanced(Tree bst) throws TreeException {
+        if (bst.isEmpty()) {
+            throw new TreeException("Binary Search Tree is empty");
+        }
+        return bst.isBalanced();
     }
 }
